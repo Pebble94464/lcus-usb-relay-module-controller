@@ -91,7 +91,7 @@ if __name__ == '__main__':
 	try:
 		# Create and open a serial port...
 		port = serial.Serial(
-			port='COM3',		# Which port is your's on? Update as needed.
+			port='COM3',		# Which port is yours on? Update as needed.
 			baudrate=9600,
 			bytesize=8,
 			timeout=2,
