@@ -73,13 +73,13 @@ class DeviceB(DeviceBase):
 		return self._get_feedback(id) # or, return self._relay_state[id]
 
 	def invert(self, id, verify=False):
+		old_state = self._relay_state[id]
 		self._send_command(id, self.INVERT)
-		state = self._get_feedback(id)
+		new_state = self._get_feedback(id)
 		if verify == True:
-			expected_state = self._relay_state[id] & 0x01 ^ 0x01
-			if state != expected_state:
+			if new_state == old_state:
 				raise Exception('The invert command failed.')
-		return state
+		return new_state
 
 	def check(self, id: int) -> int:
 		self._send_command(id, self.CHECK)
