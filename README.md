@@ -2,20 +2,14 @@
 
 # Controlling a USB to serial port relay board with Python
 
-This repository contains some example code for controlling
-an LCUS USB to serial port relay board.
+This repository contains a module and example code for controlling an LCUS 
+USB to serial port relay board with Python.
 
-The code was developed and tested using an LCUS-4 board, possibly manufactured 
-by 'EC Buying'. It should also work with other models such as the LCUS-1,
-LCUS-2 and LCUS-8.
+The module has been tested against a couple of devices: a four channel board 
+from 'EC Buying', and a two channel board from 'SAMIROB / SAMIMORE ROBOT'.
+Other modules such as LCUS-1, LCUS-2, LCUS-4, and LCUS-8 should also work.
 
-Support for boards from other manufacturers is implemented by deriving from 
-the DeviceBase in a separate script along with some configuration data.
-For example, DeviceB.py is intended for support SAMIROB / SAMIORE ROBOT boards.
-To use the example script with DeviceB, change the import line to read:
-``` py
-from lcus_usb_relay_module_controller import DeviceB as Device
-```
+*If a device you're using isn't listed, feel welcome to message me about it*.
 
 ![LCUS-4 USB to serial port relay board](./LCUS-4.jpg)
 
@@ -32,7 +26,21 @@ To unintall the module type `pip uninstall lcus-usb-relay-module-controller`
 
 
 # Getting Started
-An example script is provided below to get you up and running quickly.
+An example script is provided to get you quickly up and running, but there are
+just a couple of minor changes you may need to make in order to configure it 
+for your device.
+
+1. The COM port setting on line 7 may need updating to match the one in use.
+
+2. If using a SAMIROB device you'll need to update the import statement
+to use DeviceB, e.g.
+
+``` py
+from lcus_usb_relay_module_controller import DeviceB as Device
+```
+
+(*By default the script uses DeviceA, which is intended to support 'EC Buying' devices*).
+
 
 example.py:
 ``` py
