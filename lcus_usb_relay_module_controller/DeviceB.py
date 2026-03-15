@@ -86,10 +86,11 @@ class DeviceB(DeviceBase):
 		return self._get_feedback(id)
 
 	def query_status(self) -> list[int]:
-		self._port.reset_input_buffer()
-		self._port.write([0xFF])
-		time.sleep(self._delay) # Might not work without this small delay.
-		self._port.flush()
-		self._count = self._port.readinto(self._relay_state)
-		return self._relay_state[:self._count]
-	
+		count = self._count or len(self._relay_state)
+		self._relay_state = [0] * count # Reset our internal array.
+		for ch in range(0, count):
+			self._relay_state[ch] = self.check(ch)
+		return self._relay_state[:count]
+		# Note the SAMIROB board doesn't appear to provide a command for 
+		# querying all channels at once (0xFF). We're unable to detect the 
+		# number of channels.
