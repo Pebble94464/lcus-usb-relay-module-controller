@@ -19,7 +19,11 @@ SERIAL_PORT_CONFIG = {
 @pytest.mark.usefixtures("device")
 class TestDeviceB(DeviceTests):
 
-	# Example of how to skip or xfail a test from the base class.
-	@pytest.mark.xfail(reason="Demonstration only")
-	def test_not_a_test(self):
-		super().test_not_a_test()
+	@pytest.mark.xfail(reason="Unable to query the number of channels with this device.")
+	def test_relay_count(self, request, device):
+		super().test_relay_count(request, device)
+
+	@pytest.mark.xfail(reason='Unable to simulate a failure on this device.')
+	def test_invert_closed_with_verify(self, request, device):
+		super().test_invert_closed_with_verify(request, device)
+
