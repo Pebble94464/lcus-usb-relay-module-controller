@@ -33,7 +33,7 @@ class DeviceB(DeviceBase):
 		data = self._port.read(4)
 		starting_id = data[0] # expected value is 0xA0
 		ch_number = data[1]   # channel + 1		# channel number (base 1)
-		if ch_number != id:
+		if (ch_number - 1) != id:
 			raise Exception('Unexpected channel number returned.')
 		state = data[2]       # Expect 0 or 1
 		checksum = data[3]
