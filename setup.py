@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
 	name = 'lcus-usb-relay-module-controller',
-	version = '0.1.0',
+	version = '0.2.0',
 	author = 'Pebble94464',
 	author_email = 'jsn-usb2serial@pebble.plus.com',
 	license = 'MIT License',

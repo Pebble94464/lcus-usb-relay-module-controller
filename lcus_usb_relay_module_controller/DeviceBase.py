@@ -89,9 +89,10 @@ class DeviceBase:
 			if state != 1:
 				raise Exception('The open command failed.')
 
-	def open_all(self,verify=False) -> None:
-		raise NotImplemented
-	# TODO: implement open_all and close_all.
+	def open_all(self, verify=False) -> None:
+		"""Open all relays."""
+		for id in range(self.relay_count):
+			self.open(id, verify)
 
 	def close(self, id, verify=False) -> None:
 		"""Close a relay.
@@ -112,6 +113,11 @@ class DeviceBase:
 			state = self.check(id)
 			if state != 0:
 				raise Exception('The close command failed.')
+
+	def close_all(self, verify=False) -> None:
+		"""Close all relays."""
+		for id in range(self.relay_count):
+			self.close(id, verify)
 
 	def check(self, id: int) -> int:
 		"""Query the status of a switch.
@@ -141,3 +147,8 @@ class DeviceBase:
 				fails to change as expected.		
 		"""
 		pass
+
+	def invert_all(self, verify=False) -> None:
+		"""Invert all relays."""
+		for id in range(self.relay_count):
+			self.invert(id, verify)

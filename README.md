@@ -98,6 +98,8 @@ the version info of pyserial installed on your system using the command
 
 ## Changelog
 
+0.2.0 open_all, close_all, and invert_all functions added
+
 0.1.0 **Bug fix**:
    Initialising Device objects with SAMIROB devices failed because the 
    status information returned was in an unexpected format.

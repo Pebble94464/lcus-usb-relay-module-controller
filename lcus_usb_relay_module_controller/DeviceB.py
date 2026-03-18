@@ -86,11 +86,11 @@ class DeviceB(DeviceBase):
 		return self._get_feedback(id)
 
 	def query_status(self) -> list[int]:
-		count = self._count or len(self._relay_state)
-		self._relay_state = [0] * count # Reset our internal array.
-		for ch in range(0, count):
+		self._count = self._count or len(self._relay_state)
+		self._relay_state = [0] * self._count # Reset our internal array.
+		for ch in range(self._count):
 			self._relay_state[ch] = self.check(ch)
-		return self._relay_state[:count]
+		return self._relay_state[:self._count]
 		# Note the SAMIROB board doesn't appear to provide a command for 
 		# querying all channels at once (0xFF). We're unable to detect the 
 		# number of channels.
