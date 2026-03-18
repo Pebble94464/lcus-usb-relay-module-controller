@@ -60,19 +60,23 @@ class DeviceTests:
 	def test_close_with_verify(self, request, device):
 		pass
 
-	@pytest.mark.xfail(reason='Not yet implemented.')
-	def test_open_all(self, device):
+	def test_open_all(self, request, device):
 		device.close_all()
 		device.open_all()
-		for ch in range(0, device.relay_count):
+		for ch in range(request.module.RELAY_COUNT):
 			assert device.check(ch) == 1
 
-	@pytest.mark.xfail(reason='Not yet implemented.')
-	def test_close_all(self, device):
+	def test_close_all(self, request, device):
 		device.open_all()
 		device.close_all()
-		for ch in range(0, device.relay_count):
+		for ch in range(request.module.RELAY_COUNT):
 			assert device.check(ch) == 0
+
+	def test_invert_all(self, request, device):
+		old_state = device.query_status()
+		device.invert_all()
+		for ch in range(request.module.RELAY_COUNT):
+			assert device.check(ch) != old_state[ch]
 
 	def test_invert_open(self, device, ch):
 		device.open(ch)
